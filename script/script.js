@@ -125,5 +125,17 @@ const displayWordDetails=(word)=>{
     
 }
 
+document.getElementById('search-btn')
+.addEventListener('click',()=>{
+    const getTextValue=document.getElementById('text-input').value.trim().toLowerCase();
+    fetch('https://openapi.programming-hero.com/api/words/all')
+    .then(res=>res.json())
+    .then(data=>{
+        const allWord=data.data;
+        const filterWord=allWord.filter(word=>word.word.toLowerCase().includes(getTextValue));
+        displayWord(filterWord);
+    })
+    
+})
 
 loadButton();
