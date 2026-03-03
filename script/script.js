@@ -3,6 +3,11 @@ const createElement=(arr)=>{
   const htmlElement=arr.map(ele=>`<span class="btn">${ele}</span>`);
   return htmlElement.join(' ');
 }
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
 
 const loading=(status)=>{
     if(status){
@@ -64,7 +69,7 @@ const displayWord=(words)=>{
                 <h1 class="font-bangla text-2xl">${word.meaning?word.meaning:"পাওয়া যায় নি"} /${word.pronunciation?word.pronunciation:"পাওয়া যায় নি"}</h1>
                  <div class="flex flex-row justify-between items-center">
                     <button onclick="loadWordDetails(${word.id})" class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-circle-question"></i></button>
-                    <button class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-volume-high"></i></button>
+                    <button onclick="pronounceWord('${word.word}')" class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-volume-high"></i></button>
                  </div>
             </div>
         `
